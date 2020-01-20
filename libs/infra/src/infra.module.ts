@@ -1,8 +1,4 @@
-import { Module } from '@nestjs/common';
-import { InfraService } from './infra.service';
+import { Module } from '@nestjs/common'
 
-@Module({
-  providers: [InfraService],
-  exports: [InfraService],
-})
+@Module({})
 export class InfraModule {}

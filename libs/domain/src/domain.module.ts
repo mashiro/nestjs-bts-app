@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { DomainService } from './domain.service';
+import { Module } from '@nestjs/common'
+import { ProjectsModule } from './projects/projects.module'
+import { IssuesModule } from './issues/issues.module'
 
 @Module({
-  providers: [DomainService],
-  exports: [DomainService],
+  imports: [ProjectsModule, IssuesModule],
 })
 export class DomainModule {}

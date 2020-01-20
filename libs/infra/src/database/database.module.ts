@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { databaseConfig } from '@app/infra/database/database.config'
+import { databaseConfig } from './database.config'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import * as path from 'path'
 import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionOptions'
+import { Project, Issue } from './entities'
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { SqliteConnectionOptions } from 'typeorm/driver/sqlite/SqliteConnectionO
       ): Promise<SqliteConnectionOptions> => ({
         type: 'sqlite',
         database: configService.get<string>('database.database'),
-        entities: [path.join(__dirname, '/../**/*.entity.ts')],
+        entities: [Project, Issue],
         synchronize: true,
         logging: true,
       }),

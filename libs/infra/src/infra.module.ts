@@ -5,5 +5,6 @@ import { IssuesModule } from './issues/issues.module'
 
 @Module({
   imports: [DatabaseModule, ProjectsModule, IssuesModule],
+  exports: [ProjectsModule, IssuesModule],
 })
 export class InfraModule {}

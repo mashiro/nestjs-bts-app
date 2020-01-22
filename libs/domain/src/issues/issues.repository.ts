@@ -1,13 +1,15 @@
 import {
-  IssueDto,
-  FindIssuesDto,
-  CreateIssueDto,
-  UpdateIssueDto,
-} from '@app/domain/issues/issues.dto'
+  CreateIssueParams,
+  FindIssuesOptions,
+  IssueType,
+  UpdateIssueParams,
+} from './issues.type'
+
+export const IssuesRepositoryToken = 'IssuesRepositoryToken'
 
 export interface IssuesRepository {
-  findOne(id: string): Promise<IssueDto>
-  find(options: FindIssuesDto): Promise<IssueDto[]>
-  create(input: CreateIssueDto): Promise<IssueDto>
-  update(input: UpdateIssueDto): Promise<IssueDto>
+  findOne(id: string): Promise<IssueType>
+  find(options: FindIssuesOptions): Promise<IssueType[]>
+  create(params: CreateIssueParams): Promise<IssueType>
+  update(params: UpdateIssueParams): Promise<IssueType>
 }

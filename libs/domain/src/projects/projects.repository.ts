@@ -1,7 +1,13 @@
-import { CreateProjectDto, FindProjectsDto, ProjectDto } from './projects.dto'
+import {
+  CreateProjectParams,
+  FindProjectsOptions,
+  ProjectType,
+} from './projects.type'
+
+export const ProjectsRepositoryToken = 'ProjectsRepository'
 
 export interface ProjectsRepository {
-  findOne(id: string): Promise<ProjectDto>
-  find(options: FindProjectsDto): Promise<ProjectDto[]>
-  create(input: CreateProjectDto): Promise<ProjectDto>
+  findOne(id: string): Promise<ProjectType>
+  find(options: FindProjectsOptions): Promise<ProjectType[]>
+  create(params: CreateProjectParams): Promise<ProjectType>
 }

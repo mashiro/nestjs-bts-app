@@ -1,28 +1,28 @@
 export enum IssueStatus {
-  Open,
-  InProgress,
-  Closed,
+  Open = 'Open',
+  InProgress = 'InProgress',
+  Closed = 'Closed',
 }
 
-export class IssueDto {
+export type IssueType = {
   id: string
   projectId: string
   name: string
   status: IssueStatus
 }
 
-export class FindIssuesDto {
+export type FindIssuesOptions = {
   projectId?: string
   name?: string
   status?: IssueStatus
 }
 
-export class CreateIssueDto {
+export type CreateIssueParams = {
   projectId: string
   name: string
 }
 
-export class UpdateIssueDto {
+export type UpdateIssueParams = {
   name?: string
   status?: IssueStatus
 }

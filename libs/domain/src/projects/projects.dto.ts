@@ -6,9 +6,14 @@ export class ProjectDto extends ValueObject<ProjectDto> {
 }
 
 export class FindProjectsDto extends ValueObject<FindProjectsDto> {
-  name?: string
+  readonly name?: string
 }
 
 export class CreateProjectDto extends ValueObject<CreateProjectDto> {
-  name: string
+  readonly name: string
+}
+
+export class UpdateProjectDto extends ValueObject<UpdateProjectDto> {
+  readonly id: string
+  readonly name?: string
 }

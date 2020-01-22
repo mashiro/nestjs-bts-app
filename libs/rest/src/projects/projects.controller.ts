@@ -1,5 +1,5 @@
-import { ProjectsService } from '@app/domain/projects/projects.service'
 import { ProjectDto } from '@app/domain/projects/projects.dto'
+import { ProjectsService } from '@app/domain/projects/projects.service'
 import {
   Body,
   Controller,
@@ -7,18 +7,18 @@ import {
   HttpException,
   HttpStatus,
   Param,
-  Post,
+  Post, Put,
   Query,
 } from '@nestjs/common'
-import { CreateProjectDto, FindProjectsDto } from './projects.dto'
+import { CreateProjectForm, FindProjectsForm, UpdateProjectForm } from './projects.form'
 
 @Controller()
 export class RestProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Get()
-  find(@Query() query: FindProjectsDto): Promise<ProjectDto[]> {
-    return this.projectsService.find({ name: query.name })
+  find(@Query() form: FindProjectsForm): Promise<ProjectDto[]> {
+    return this.projectsService.find({ name: form.name })
   }
 
   @Get(':id')
@@ -32,7 +32,12 @@ export class RestProjectsController {
   }
 
   @Post()
-  create(@Body() body: CreateProjectDto): Promise<ProjectDto> {
-    return this.projectsService.create(body)
+  create(@Body() form: CreateProjectForm): Promise<ProjectDto> {
+    return this.projectsService.create(form)
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() form: UpdateProjectForm): Promise<ProjectDto> {
+    return this.projectsService.update({ id, ...form })
   }
 }

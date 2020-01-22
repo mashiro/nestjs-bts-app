@@ -3,6 +3,7 @@ import {
   CreateProjectDto,
   FindProjectsDto,
   ProjectDto,
+  UpdateProjectDto,
 } from '@app/domain/projects/projects.dto'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -27,7 +28,7 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
 
   async find(dto: FindProjectsDto): Promise<ProjectDto[]> {
     const q = this.projectsRepository.createQueryBuilder('project')
-    if (dto.name != null) {
+    if (dto.name) {
       q.andWhere('project.name LIKE :name', { name: dto.name })
     }
 
@@ -35,9 +36,22 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
     return projects.map(project => this.toDto(project))
   }
 
-  create(dto: CreateProjectDto): Promise<ProjectDto> {
+  async create(dto: CreateProjectDto): Promise<ProjectDto> {
     const project = new Project()
     project.name = dto.name
+
+    return this.projectsRepository.save(project).then(this.toDto)
+  }
+
+  async update(dto: UpdateProjectDto): Promise<ProjectDto> {
+    const project = await this.projectsRepository.findOne(dto.id)
+    if (!project) {
+      return null
+    }
+
+    if (dto.name) {
+      project.name = dto.name
+    }
 
     return this.projectsRepository.save(project).then(this.toDto)
   }

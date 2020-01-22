@@ -19,6 +19,9 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
 
   async findOne(id: string): Promise<ProjectType> {
     const project = await this.projectsRepository.findOne(id)
+    if (!project) {
+      return null
+    }
     return this.toDto(project)
   }
 
@@ -33,7 +36,10 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
   }
 
   create(params: CreateProjectParams): Promise<ProjectType> {
-    return undefined
+    const project = new Project()
+    project.name = params.name
+
+    return this.projectsRepository.save(project).then(this.toDto)
   }
 
   private toDto(project: Project): ProjectType {

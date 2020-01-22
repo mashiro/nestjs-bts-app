@@ -1,7 +1,11 @@
-export class CreateProjectDto {
-  readonly name: string
+import { ApiProperty } from '@nestjs/swagger'
+
+export class FindProjectsDto {
+  @ApiProperty({ required: false })
+  readonly name?: string
 }
 
-export type CreateProjectInput = {
+export class CreateProjectDto {
+  @ApiProperty()
   readonly name: string
 }

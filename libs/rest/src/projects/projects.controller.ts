@@ -1,29 +1,38 @@
 import { ProjectsService } from '@app/domain/projects/projects.service'
 import { ProjectType } from '@app/domain/projects/projects.type'
-import { Body, Controller, Get, Param, Post } from '@nestjs/common'
-import { CreateProjectDto, CreateProjectInput } from './projects.dto'
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common'
+import { CreateProjectDto, FindProjectsDto } from './projects.dto'
 
 @Controller()
 export class RestProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Get()
-  find(): Promise<ProjectType[]> {
-    return this.projectsService.find({})
+  find(@Query() query: FindProjectsDto): Promise<ProjectType[]> {
+    return this.projectsService.find({ name: query.name })
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<ProjectType> {
-    return this.projectsService.findOne(id)
+  async findOne(@Param('id') id: string): Promise<ProjectType> {
+    const project = await this.projectsService.findOne(id)
+    if (!project) {
+      throw new HttpException('Not found', HttpStatus.NOT_FOUND)
+    }
+
+    return project
   }
 
-  @Post('dto')
-  create(@Body() input: CreateProjectDto): Promise<ProjectType> {
-    return this.projectsService.create(input)
-  }
-
-  @Post('type')
-  create2(@Body() input: CreateProjectInput): Promise<ProjectType> {
-    return this.projectsService.create(input)
+  @Post()
+  create(@Body() body: CreateProjectDto): Promise<ProjectType> {
+    return this.projectsService.create(body)
   }
 }

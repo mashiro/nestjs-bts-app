@@ -60,6 +60,8 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
     return {
       id: project.id.toString(),
       name: project.name,
+      createdAt: project.createdAt,
+      updatedAt: project.updatedAt,
     }
   }
 }

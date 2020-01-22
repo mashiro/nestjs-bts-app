@@ -7,12 +7,17 @@ import {
   HttpException,
   HttpStatus,
   Param,
-  Post, Put,
+  Post,
+  Put,
   Query,
 } from '@nestjs/common'
-import { CreateProjectForm, FindProjectsForm, UpdateProjectForm } from './projects.form'
+import {
+  CreateProjectForm,
+  FindProjectsForm,
+  UpdateProjectForm,
+} from './projects.form'
 
-@Controller()
+@Controller('projects')
 export class RestProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
@@ -37,7 +42,10 @@ export class RestProjectsController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() form: UpdateProjectForm): Promise<ProjectDto> {
-    return this.projectsService.update({ id, ...form })
+  async update(
+    @Param('id') id: string,
+    @Body() form: UpdateProjectForm
+  ): Promise<ProjectDto> {
+    return this.projectsService.update({ ...form, id })
   }
 }

@@ -1,22 +1,22 @@
-import { RestProjectsModule } from '@app/rest/projects/projects.module'
 import { INestApplication, Module } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { RouterModule, Routes } from 'nest-router'
+import { RestIssuesModule } from './issues/issues.module'
+import { RestProjectsModule } from './projects/projects.module'
 
 const routes: Routes = [
   {
     path: '/api',
-    children: [
-      {
-        path: '/projects',
-        module: RestProjectsModule,
-      },
-    ],
+    children: [RestProjectsModule, RestIssuesModule],
   },
 ]
 
 @Module({
-  imports: [RouterModule.forRoutes(routes), RestProjectsModule],
+  imports: [
+    RouterModule.forRoutes(routes),
+    RestProjectsModule,
+    RestIssuesModule,
+  ],
 })
 export class RestModule {
   static setupSwagger(app: INestApplication): void {

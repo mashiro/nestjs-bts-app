@@ -1,6 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common'
+import {
+  CreateIssueDto,
+  FindIssuesDto,
+  IssueDto,
+  IssueStatus,
+  UpdateIssueDto,
+} from './issues.dto'
 import { IssuesRepository, IssuesRepositoryToken } from './issues.repository'
-import { FindIssuesDto, IssueDto } from './issues.dto'
 
 @Injectable()
 export class IssuesService {
@@ -13,7 +19,15 @@ export class IssuesService {
     return this.issuesRepository.findOne(id)
   }
 
-  find(options: FindIssuesDto): Promise<IssueDto[]> {
-    return this.issuesRepository.find(options)
+  find(dto: FindIssuesDto): Promise<IssueDto[]> {
+    return this.issuesRepository.find(dto)
+  }
+
+  create(dto: Omit<CreateIssueDto, 'status'>): Promise<IssueDto> {
+    return this.issuesRepository.create({ ...dto, status: IssueStatus.Open })
+  }
+
+  update(dto: UpdateIssueDto): Promise<IssueDto> {
+    return this.issuesRepository.update(dto)
   }
 }

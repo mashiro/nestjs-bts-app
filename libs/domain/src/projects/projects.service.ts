@@ -1,9 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
-import {
-  CreateProjectParams,
-  FindProjectsOptions,
-  ProjectType,
-} from './projects.type'
+import { CreateProjectDto, FindProjectsDto, ProjectDto } from './projects.dto'
 import {
   ProjectsRepository,
   ProjectsRepositoryToken,
@@ -16,15 +12,15 @@ export class ProjectsService {
     private readonly projectsRepository: ProjectsRepository
   ) {}
 
-  findOne(id: string): Promise<ProjectType> {
+  findOne(id: string): Promise<ProjectDto> {
     return this.projectsRepository.findOne(id)
   }
 
-  find(options: FindProjectsOptions): Promise<ProjectType[]> {
+  find(options: FindProjectsDto): Promise<ProjectDto[]> {
     return this.projectsRepository.find(options)
   }
 
-  create(params: CreateProjectParams): Promise<ProjectType> {
+  create(params: CreateProjectDto): Promise<ProjectDto> {
     return this.projectsRepository.create(params)
   }
 }

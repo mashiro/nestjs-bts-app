@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { IssuesRepository, IssuesRepositoryToken } from './issues.repository'
-import { FindIssuesOptions, IssueType } from './issues.type'
+import { FindIssuesDto, IssueDto } from './issues.dto'
 
 @Injectable()
 export class IssuesService {
@@ -9,11 +9,11 @@ export class IssuesService {
     private readonly issuesRepository: IssuesRepository
   ) {}
 
-  findOne(id: string): Promise<IssueType> {
+  findOne(id: string): Promise<IssueDto> {
     return this.issuesRepository.findOne(id)
   }
 
-  find(options: FindIssuesOptions): Promise<IssueType[]> {
+  find(options: FindIssuesDto): Promise<IssueDto[]> {
     return this.issuesRepository.find(options)
   }
 }

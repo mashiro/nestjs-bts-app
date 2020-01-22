@@ -1,9 +1,9 @@
 import { ProjectsRepository } from '@app/domain/projects/projects.repository'
 import {
-  CreateProjectParams,
-  FindProjectsOptions,
-  ProjectType,
-} from '@app/domain/projects/projects.type'
+  CreateProjectDto,
+  FindProjectsDto,
+  ProjectDto,
+} from '@app/domain/projects/projects.dto'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { EntityRepository, Repository } from 'typeorm'
@@ -17,7 +17,7 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
     private readonly projectsRepository: Repository<Project>
   ) {}
 
-  async findOne(id: string): Promise<ProjectType> {
+  async findOne(id: string): Promise<ProjectDto> {
     const project = await this.projectsRepository.findOne(id)
     if (!project) {
       return null
@@ -25,24 +25,24 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
     return this.toDto(project)
   }
 
-  async find(options: FindProjectsOptions): Promise<ProjectType[]> {
+  async find(dto: FindProjectsDto): Promise<ProjectDto[]> {
     const q = this.projectsRepository.createQueryBuilder('project')
-    if (options.name != null) {
-      q.andWhere('project.name LIKE :name', { name: options.name })
+    if (dto.name != null) {
+      q.andWhere('project.name LIKE :name', { name: dto.name })
     }
 
     const projects = await q.getMany()
     return projects.map(project => this.toDto(project))
   }
 
-  create(params: CreateProjectParams): Promise<ProjectType> {
+  create(dto: CreateProjectDto): Promise<ProjectDto> {
     const project = new Project()
-    project.name = params.name
+    project.name = dto.name
 
     return this.projectsRepository.save(project).then(this.toDto)
   }
 
-  private toDto(project: Project): ProjectType {
+  private toDto(project: Project): ProjectDto {
     return {
       id: project.id.toString(),
       name: project.name,

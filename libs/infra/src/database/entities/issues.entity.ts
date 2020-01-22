@@ -1,4 +1,4 @@
-import { IssueStatus } from '@app/domain/issues/issues.type'
+import { IssueStatus } from '@app/domain/issues/issues.dto'
 import { Project } from '@app/infra/database/entities/projects.entity'
 import {
   Column,

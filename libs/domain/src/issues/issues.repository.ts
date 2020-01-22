@@ -1,15 +1,15 @@
 import {
-  CreateIssueParams,
-  FindIssuesOptions,
-  IssueType,
-  UpdateIssueParams,
-} from './issues.type'
+  CreateIssueDto,
+  FindIssuesDto,
+  IssueDto,
+  UpdateIssueDto,
+} from './issues.dto'
 
 export const IssuesRepositoryToken = 'IssuesRepositoryToken'
 
 export interface IssuesRepository {
-  findOne(id: string): Promise<IssueType>
-  find(options: FindIssuesOptions): Promise<IssueType[]>
-  create(params: CreateIssueParams): Promise<IssueType>
-  update(params: UpdateIssueParams): Promise<IssueType>
+  findOne(id: string): Promise<IssueDto>
+  find(options: FindIssuesDto): Promise<IssueDto[]>
+  create(params: CreateIssueDto): Promise<IssueDto>
+  update(params: UpdateIssueDto): Promise<IssueDto>
 }

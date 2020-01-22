@@ -1,9 +1,9 @@
-import { InfraModule } from '@app/infra/infra.module'
+import { InfraProjectsModule } from '@app/infra/projects/projects.module'
 import { Module } from '@nestjs/common'
 import { ProjectsService } from './projects.service'
 
 @Module({
-  imports: [InfraModule],
+  imports: [InfraProjectsModule],
   providers: [ProjectsService],
   exports: [ProjectsService],
 })

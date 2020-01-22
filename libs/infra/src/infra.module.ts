@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common'
-import { DatabaseModule } from './database/database.module'
-import { ProjectsModule } from './projects/projects.module'
-import { IssuesModule } from './issues/issues.module'
+import { InfraIssuesModule } from './issues/issues.module'
+import { InfraProjectsModule } from './projects/projects.module'
 
 @Module({
-  imports: [DatabaseModule, ProjectsModule, IssuesModule],
-  exports: [ProjectsModule, IssuesModule],
+  imports: [InfraProjectsModule, InfraIssuesModule],
+  exports: [InfraProjectsModule, InfraIssuesModule],
 })
 export class InfraModule {}

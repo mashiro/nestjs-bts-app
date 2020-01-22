@@ -22,6 +22,12 @@
       ],
       "@app/infra/*": [
         "libs/infra/src/*"
+      ],
+      "@app/rest": [
+        "libs/rest/src"
+      ],
+      "@app/rest/*": [
+        "libs/rest/src/*"
       ]
     }
   },

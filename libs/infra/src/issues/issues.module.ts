@@ -1,4 +1,5 @@
 import { IssuesRepositoryToken } from '@app/domain/issues/issues.repository'
+import { DatabaseModule } from '@app/infra/database/database.module'
 import { Module, Provider } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Issue } from '../database/entities'
@@ -10,8 +11,8 @@ const IssuesRepositoryProvider: Provider = {
 }
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Issue])],
+  imports: [DatabaseModule, TypeOrmModule.forFeature([Issue])],
   providers: [IssuesRepositoryProvider],
   exports: [IssuesRepositoryProvider],
 })
-export class IssuesModule {}
+export class InfraIssuesModule {}

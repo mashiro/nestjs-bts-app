@@ -14,6 +14,7 @@ import { Issue, Project } from './entities'
         configService: ConfigService
       ): Promise<MysqlConnectionOptions> => ({
         type: 'mysql',
+        timezone: 'Z',
         host: configService.get<string>('database.host'),
         port: configService.get<number>('database.port'),
         username: configService.get<string>('database.username'),

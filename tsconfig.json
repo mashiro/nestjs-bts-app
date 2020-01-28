@@ -28,6 +28,12 @@
       ],
       "@app/rest/*": [
         "libs/rest/src/*"
+      ],
+      "@app/graphql": [
+        "libs/graphql/src"
+      ],
+      "@app/graphql/*": [
+        "libs/graphql/src/*"
       ]
     }
   },

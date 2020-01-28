@@ -23,15 +23,20 @@
     "@nestjs/common": "^6.7.2",
     "@nestjs/config": "^0.1.0",
     "@nestjs/core": "^6.7.2",
+    "@nestjs/graphql": "^6.5.3",
     "@nestjs/platform-express": "^6.7.2",
     "@nestjs/swagger": "^4.1.15",
     "@nestjs/typeorm": "^6.2.0",
+    "apollo-server-express": "^2.9.16",
+    "graphql": "^14.5.8",
+    "graphql-tools": "^4.0.6",
     "mysql": "^2.18.0",
     "nest-router": "^1.0.9",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3",
     "swagger-ui-express": "^4.1.3",
+    "type-graphql": "^0.17.6",
     "typeorm": "^0.2.22"
   },
   "devDependencies": {
@@ -85,7 +90,9 @@
       "@app/infra/(.*)": "<rootDir>/libs/infra/src/$1",
       "@app/infra": "<rootDir>/libs/infra/src",
       "@app/rest/(.*)": "<rootDir>/libs/rest/src/$1",
-      "@app/rest": "<rootDir>/libs/rest/src"
+      "@app/rest": "<rootDir>/libs/rest/src",
+      "@app/graphql/(.*)": "<rootDir>/libs/graphql/src/$1",
+      "@app/graphql": "<rootDir>/libs/graphql/src"
     }
   }
 }

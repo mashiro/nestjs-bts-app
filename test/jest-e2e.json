@@ -16,6 +16,8 @@
     "@app/infra/(.*)": "<rootDir>/../libs/infra/src/$1",
     "@app/infra": "<rootDir>/../libs/infra/src",
     "@app/rest/(.*)": "<rootDir>/../libs/rest/src/$1",
-    "@app/rest": "<rootDir>/../libs/rest/src"
+    "@app/rest": "<rootDir>/../libs/rest/src",
+    "@app/graphql/(.*)": "<rootDir>/../libs/graphql/src/$1",
+    "@app/graphql": "<rootDir>/../libs/graphql/src"
   }
 }

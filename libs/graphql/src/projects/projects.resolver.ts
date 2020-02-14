@@ -13,13 +13,13 @@ export class ProjectsResolver {
   ) {}
 
   @Query(returns => [ProjectType])
-  async projects(@Args() args: ProjectsArgs) {
+  async projects(@Args() args: ProjectsArgs): Promise<ProjectType[]> {
     const projects = await this.projectsService.find(args)
     return projects.map(ProjectType.fromDomain)
   }
 
   @ResolveProperty()
-  async issues(@Root() project: ProjectType) {
+  async issues(@Root() project: ProjectType): Promise<IssueType[]> {
     const issues = await this.issuesService.find({ projectId: project.id })
     return issues.map(IssueType.fromDomain)
   }

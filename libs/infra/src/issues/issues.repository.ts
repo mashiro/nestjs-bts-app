@@ -25,6 +25,11 @@ export class IssuesRepositoryImpl implements IssuesRepository {
     return this.toDto(issue)
   }
 
+  async findByIds(ids: string[]): Promise<IssueDto[]> {
+    const projects = await this.issuesRepository.findByIds(ids)
+    return projects.map(this.toDto)
+  }
+
   async find(dto: FindIssuesDto): Promise<IssueDto[]> {
     const q = this.issuesRepository.createQueryBuilder('issue')
     if (dto.projectId != null) {

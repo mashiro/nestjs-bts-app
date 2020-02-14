@@ -19,6 +19,10 @@ export class IssuesService {
     return this.issuesRepository.findOne(id)
   }
 
+  findByIds(ids: string[]): Promise<IssueDto[]> {
+    return this.issuesRepository.findByIds(ids)
+  }
+
   find(dto: FindIssuesDto): Promise<IssueDto[]> {
     return this.issuesRepository.find(dto)
   }

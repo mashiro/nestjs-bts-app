@@ -21,6 +21,10 @@ export class ProjectsService {
     return this.projectsRepository.findOne(id)
   }
 
+  findByIds(ids: string[]): Promise<ProjectDto[]> {
+    return this.projectsRepository.findByIds(ids)
+  }
+
   find(dto: FindProjectsDto): Promise<ProjectDto[]> {
     return this.projectsRepository.find(dto)
   }

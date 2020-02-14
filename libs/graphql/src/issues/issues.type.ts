@@ -24,17 +24,15 @@ export class IssueType {
 
   projectId: string
 
-  static fromDomain(dto: IssueDto): IssueTypeFieldResolvers {
+  static fromDomain(dto: IssueDto): IssueType {
     return {
       id: dto.id,
       name: dto.name,
       status: dto.status,
       createdAt: dto.createdAt,
       updatedAt: dto.updatedAt,
+      project: null,
       projectId: dto.projectId,
     }
   }
 }
-
-export type IssueTypeMethodResolvers = 'project'
-export type IssueTypeFieldResolvers = Omit<IssueType, IssueTypeMethodResolvers>

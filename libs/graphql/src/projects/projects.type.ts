@@ -19,18 +19,13 @@ export class ProjectType {
   @Field(type => [IssueType])
   issues: IssueType[]
 
-  static fromDomain(dto: ProjectDto): ProjectTypeFieldResolvers {
+  static fromDomain(dto: ProjectDto): ProjectType {
     return {
       id: dto.id,
       name: dto.name,
       createdAt: dto.createdAt,
       updatedAt: dto.updatedAt,
+      issues: [],
     }
   }
 }
-
-export type ProjectTypeMethodResolvers = 'issues'
-export type ProjectTypeFieldResolvers = Omit<
-  ProjectType,
-  ProjectTypeMethodResolvers
->

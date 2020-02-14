@@ -26,6 +26,11 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
     return this.toDto(project)
   }
 
+  async findByIds(ids: string[]): Promise<ProjectDto[]> {
+    const projects = await this.projectsRepository.findByIds(ids)
+    return projects.map(this.toDto)
+  }
+
   async find(dto: FindProjectsDto): Promise<ProjectDto[]> {
     const q = this.projectsRepository.createQueryBuilder('project')
     if (dto.name) {
@@ -33,7 +38,7 @@ export class ProjectsRepositoryImpl implements ProjectsRepository {
     }
 
     const projects = await q.getMany()
-    return projects.map(project => this.toDto(project))
+    return projects.map(this.toDto)
   }
 
   async create(dto: CreateProjectDto): Promise<ProjectDto> {
